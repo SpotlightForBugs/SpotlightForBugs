@@ -2,23 +2,23 @@ name: Purge Cache and Check Response
 
 on:
   schedule:
-    # Runs daily at midnight (UTC)
-    - cron: '0 0 * * *'
-  workflow_dispatch: # Allows manual execution
+    - cron: '0 0 * * *' # Daily at midnight (UTC)
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   purge_and_check:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Perform PURGE Request
+    - name: Perform PURGE Request and Check Response
       id: purge
       run: |
-        RESPONSE=$(curl -s -o /dev/stderr -w "%{http_code}" -X PURGE "https://camo.githubusercontent.com/f7fc0668b22817d7f64fc1d54f3d835f2ac057df486f2fc696e00a05a828bcc1/68747470733a2f2f7472796861636b6d652d6261646765732e73332e616d617a6f6e6177732e636f6d2f7366622e706e673f636163686562757374696e673d74727565")
-        echo "HTTP Status: $RESPONSE"
-        if ! [[ "$RESPONSE" == *"status\":\"ok\""* ]]; then
+        RESPONSE=$(curl -s -X PURGE "https://camo.githubusercontent.com/f7fc0668b22817d7f64fc1d54f3d835f2ac057df486f2fc696e00a05a828bcc1/68747470733a2f2f7472796861636b6d652d6261646765732e73332e616d617a6f6e6177732e636f6d2f7366622e706e673f636163686562757374696e673d74727565")
+        echo "Response Body: $RESPONSE"
+        
+        if echo "$RESPONSE" | grep -q '"status":"ok"'; then
+          echo "Purge successful!"
+        else
           echo "Error: Response did not contain 'status: ok'"
           exit 1
         fi
-    - name: Success Message
-      run: echo "Purge successful!"
