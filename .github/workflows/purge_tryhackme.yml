@@ -16,10 +16,9 @@ jobs:
         RESPONSE=$(curl -s -X PURGE "https://camo.githubusercontent.com/f7fc0668b22817d7f64fc1d54f3d835f2ac057df486f2fc696e00a05a828bcc1/68747470733a2f2f7472796861636b6d652d6261646765732e73332e616d617a6f6e6177732e636f6d2f7366622e706e673f636163686562757374696e673d74727565")
         echo "Response Body: $RESPONSE"
         
-        # Use jq to parse the JSON response
-        if echo "$RESPONSE" | jq -e '.status == "ok"' > /dev/null; then
+        if echo "$RESPONSE" | grep -q 'ok'; then
           echo "Purge successful!"
         else
-          echo "Error: Response did not contain 'status: ok'"
+          echo "Error: Response did not contain 'ok'"
           exit 1
         fi
