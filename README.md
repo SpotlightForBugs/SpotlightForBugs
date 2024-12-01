@@ -6,7 +6,7 @@
 
 </a>
 
-<a href="https://tryhackme.com/r/p/sfb"><img src="https://tryhackme-badges.s3.amazonaws.com/sfb.png?cachebusting=true" height="42" alt="Your Image Badge" /></a>
+<a href="https://tryhackme.com/r/p/sfb"><img src="https://tryhackme-badges.s3.amazonaws.com/sfb.png?cachebusting=true" height="100" alt="Your Image Badge" /></a>
 
 <a href="https://github.com/Spotlightforbugs" target="_blank">
 <img src=https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
